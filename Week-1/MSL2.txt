@@ -95,8 +95,12 @@ priority 200
 exit
 
 !Miscellaneous System Config
+ip routing
 
 !Spanning Tree Config
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 root secondary
+spanning-tree vlan 20 root primary
 
 !EtherChannels Config
 

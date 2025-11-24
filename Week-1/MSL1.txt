@@ -98,6 +98,9 @@ exit
 ip routing
 
 !Spanning Tree Config
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root secondary
 
 !EtherChannels Config
 

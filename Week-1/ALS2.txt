@@ -37,6 +37,7 @@ exit
 !Miscellaneous System Config
 
 !Spanning Tree Config
+spanning-tree mode rapid-pvst
 
 !EtherChannels Config
 
