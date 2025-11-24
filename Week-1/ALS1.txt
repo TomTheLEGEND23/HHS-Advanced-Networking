@@ -1,0 +1,47 @@
+enable
+configure terminal
+hostname ALS1
+no ip domain-lookup
+banner motd #Verboden toegang voor onbevoegde!#
+line console 0
+ exec-timeout 60 0
+ logging synchronous
+ exit
+enable secret class
+username user priv 15 password cisco
+aaa new-model
+aaa authentication login MGT local
+line vty 0 4
+ transport input ssh
+ login authentication MGT
+ exec-timeout 60
+ logging synchronous
+ exit
+ip domain-name hhs.nl
+!crypto key zeroize rsa
+crypto key generate rsa general-keys modulus 2024
+
+!Vlan Config
+
+!Port Config
+interface range fa0/21-22
+channel-protocol lacp
+channel-group 1 mode active
+exit
+
+interface range fa0/23-24
+channel-protocol lacp
+channel-group 2 mode active
+exit
+
+!Miscellaneous System Config
+
+!Spanning Tree Config
+
+!EtherChannels Config
+
+!Ip Config
+
+end
+clock set 09:36:34 24 nov 2025
+copy running-config startup-config
