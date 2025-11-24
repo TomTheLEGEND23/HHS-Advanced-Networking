@@ -22,23 +22,32 @@ ip domain-name hhs.nl
 crypto key generate rsa general-keys modulus 2024
 
 !Vlan Config
+vlan 10
+name vlan10
+vlan 20
+name vlan20
 
 !Port Config
 interface range fa0/23-24
 channel-protocol lacp
 channel-group 1 mode active
+switchport mode trunk
 exit
 
 interface range fa0/21-22
 channel-protocol lacp
 channel-group 2 mode active
+switchport mode trunk
 exit
+
+interface fa0/1
+switchport mode access
+switchport access vlan 20
 
 !Miscellaneous System Config
 
 !Spanning Tree Config
 spanning-tree mode rapid-pvst
-
 !EtherChannels Config
 
 !Ip Config

@@ -33,7 +33,7 @@ interface Gi0/0/1
 exit
 
 interface loopback1
- ip address 10.10.10.10 255.255.255.252
+ ip address 10.10.10.10 255.255.255.255
  no shutdown
 exit
 
@@ -43,9 +43,9 @@ exit
 
 !OSPF Config
 router ospf 1
- network 10.1.0.0 0.0.0.4 area 0
- network 10.2.0.0 0.0.0.4 area 0
- network 10.10.10.10 0.0.0.1 area 0
+ network 10.1.0.0 0.0.0.3 area 0
+ network 10.2.0.0 0.0.0.3 area 0
+ network 10.10.10.10 0.0.0.0 area 0
 exit
 end
 clock set 09:36:34 24 nov 2025
