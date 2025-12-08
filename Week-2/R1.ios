@@ -22,7 +22,7 @@ line vty 0 4
  exit
 ip domain-name hhs.nl
 !crypto key zeroize rsa
-crypto key generate rsa general-keys modulus 2024
+crypto key generate rsa general-keys modulus 2048
 
 !Port Config
 interface Gi0/0/0
