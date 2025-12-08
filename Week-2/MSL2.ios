@@ -96,13 +96,6 @@ no switchport
  no shutdown
 exit
 
-interface range gigabitEthernet 1/0/13-14
-switchport port-security
-switchport port-security maximum 1
-switchport port-security mac-address sticky
-switchport port-security violation shutdown
-exit
-
 interface range gigabitEthernet 1/0/21-24
 switchport port-security
 switchport port-security maximum 1
