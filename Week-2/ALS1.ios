@@ -42,7 +42,6 @@ channel-group 1 mode active
 switchport mode trunk
 switchport trunk native vlan 999
 switchport nonegotiate
-ip dhcp snooping trust
 exit
 
 interface range fa0/23-24
@@ -51,20 +50,26 @@ channel-group 2 mode active
 switchport mode trunk
 switchport trunk native vlan 999
 switchport nonegotiate
-ip dhcp snooping trust
+exit
+
+interface Port-channel1
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
+ ip dhcp snooping trust
+exit
+
+interface Port-channel2
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
+ ip dhcp snooping trust
 exit
 
 interface fa0/1
 switchport mode access
 switchport access vlan 10
 switchport nonegotiate
-switchport port-security
-switchport port-security maximum 1
-switchport port-security mac-address sticky
-switchport port-security violation shutdown
-exit
-
-interface range fa0/21-24
 switchport port-security
 switchport port-security maximum 1
 switchport port-security mac-address sticky
