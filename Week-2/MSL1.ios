@@ -24,6 +24,7 @@ ip domain-name hhs.nl
 !crypto key zeroize rsa
 crypto key generate rsa general-keys modulus 2048
 
+!Miscellaneous System Config
 ip routing
 
 !Vlan Config
@@ -120,9 +121,6 @@ track 11 decrement 50
 address 10.0.2.3 primary
 priority 100
 exit
-
-!Miscellaneous System Config
-ip routing
 
 !Spanning Tree Config
 spanning-tree mode rapid-pvst
