@@ -30,6 +30,9 @@ name vlan20
 vlan 999
 name unused
 
+ip dhcp snooping
+ip dhcp snooping vlan 10,20
+
 !Port Config
 interface range fa0/21-22
 channel-protocol lacp
@@ -37,6 +40,7 @@ channel-group 1 mode active
 switchport mode trunk
 switchport trunk native vlan 999
 switchport nonegotiate
+ip dhcp snooping trust
 exit
 
 interface range fa0/23-24
@@ -45,6 +49,7 @@ channel-group 2 mode active
 switchport mode trunk
 switchport trunk native vlan 999
 switchport nonegotiate
+ip dhcp snooping trust
 exit
 
 interface fa0/1
