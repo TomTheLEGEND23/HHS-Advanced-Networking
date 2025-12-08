@@ -81,6 +81,29 @@ no switchport
  no shutdown
 exit
 
+interface range gigabitEthernet 1/0/13-14
+switchport port-security
+switchport port-security maximum 1
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+exit
+
+interface range gigabitEthernet 1/0/21-24
+switchport port-security
+switchport port-security maximum 1
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+exit
+
+!Shutdown unused ports
+interface range gigabitEthernet 1/0/1-10
+shutdown
+exit
+
+interface range gigabitEthernet 1/0/12,15-20
+shutdown
+exit
+
 fhrp version vrrp v3
 track 11 interface GigabitEthernet1/0/11 line-protocol
 
