@@ -1,5 +1,7 @@
 enable
 delete vlan.dat
+
+
 configure terminal
 hostname MSL1
 no ip domain-lookup
