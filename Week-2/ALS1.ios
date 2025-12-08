@@ -79,4 +79,4 @@ spanning-tree mode rapid-pvst
 
 end
 clock set 09:36:34 24 nov 2025
-copy running-config startup-config
+!copy running-config startup-config

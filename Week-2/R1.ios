@@ -72,4 +72,4 @@ ip dhcp excluded-address 10.0.2.1 10.0.2.9
 
 end
 clock set 09:36:34 24 nov 2025
-copy running-config startup-config
+!copy running-config startup-config
