@@ -29,6 +29,8 @@ vlan 10
  name vlan10
 vlan 20
  name vlan20
+vlan 999
+ name unused
 
 !Port Config
 interface Vlan10
@@ -52,6 +54,8 @@ exit
 
 interface range gigabitEthernet 1/0/21-22
  switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
  channel-protocol lacp
  channel-group 2 mode active
  lacp port-priority 100
@@ -59,6 +63,8 @@ exit
 
 interface range gigabitEthernet 1/0/23-24
  switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
  channel-protocol lacp
  channel-group 1 mode active
  lacp port-priority 100
@@ -66,10 +72,14 @@ exit
 
 interface port-channel 1
  switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
 exit
 
 interface port-channel 2
  switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
 exit
 
 interface port-channel 3

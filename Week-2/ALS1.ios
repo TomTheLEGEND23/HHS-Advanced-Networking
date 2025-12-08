@@ -27,23 +27,30 @@ vlan 10
 name vlan10
 vlan 20
 name vlan20
+vlan 999
+name unused
 
 !Port Config
 interface range fa0/21-22
 channel-protocol lacp
 channel-group 1 mode active
 switchport mode trunk
+switchport trunk native vlan 999
+switchport nonegotiate
 exit
 
 interface range fa0/23-24
 channel-protocol lacp
 channel-group 2 mode active
 switchport mode trunk
+switchport trunk native vlan 999
+switchport nonegotiate
 exit
 
 interface fa0/1
 switchport mode access
 switchport access vlan 10
+switchport nonegotiate
 switchport port-security
 switchport port-security maximum 1
 switchport port-security mac-address sticky
