@@ -33,7 +33,7 @@ vlan 999
 name unused
 
 ip dhcp snooping
-ip dhcp snooping vlan 10 20
+ip dhcp snooping vlan 10,20
 
 !Port Config
 interface range fa0/23-24
