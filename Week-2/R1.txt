@@ -1,0 +1,52 @@
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+banner motd #Verboden toegang voor onbevoegde!#
+line console 0
+ exec-timeout 60 0
+ logging synchronous
+ exit
+enable secret class
+username user priv 15 password cisco
+aaa new-model
+aaa authentication login MGT local
+line vty 0 4
+ transport input ssh
+ login authentication MGT
+ exec-timeout 60
+ logging synchronous
+ exit
+ip domain-name hhs.nl
+!crypto key zeroize rsa
+crypto key generate rsa general-keys modulus 2024
+
+!Port Config
+interface Gi0/0/0
+ ip address 10.1.0.1 255.255.255.252
+ no shutdown
+exit
+
+interface Gi0/0/1
+ ip address 10.2.0.1 255.255.255.252
+ no shutdown
+exit
+
+interface loopback1
+ ip address 10.10.10.10 255.255.255.255
+ no shutdown
+exit
+
+!Miscellaneous System Config
+
+!Ip Config
+
+!OSPF Config
+router ospf 1
+ network 10.1.0.0 0.0.0.3 area 0
+ network 10.2.0.0 0.0.0.3 area 0
+ network 10.10.10.10 0.0.0.0 area 0
+exit
+end
+clock set 09:36:34 24 nov 2025
+copy running-config startup-config
