@@ -74,7 +74,7 @@ exit
 
 interface FastEthernet0/1
  switchport mode access
- switchport access vlan 999
+ switchport access vlan 10
  spanning-tree portfast
  switchport port-security
  switchport port-security maximum 1
@@ -217,7 +217,7 @@ exit
 
 interface FastEthernet0/14
  switchport mode access
- switchport access vlan 10
+ switchport access vlan 999
  spanning-tree portfast
  switchport port-security
  switchport port-security maximum 1
