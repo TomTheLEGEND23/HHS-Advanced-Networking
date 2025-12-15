@@ -37,12 +37,14 @@ interface GigabitEthernet 1/0/1
   switchport mode trunk
   switchport trunk allow vlan 10,20,30
  description Link to AlS1 gig0/1
+ service-policy output MLS-QOS
  no shutdown
 exit
 interface GigabitEthernet 1/0/2
 no switchport
- ip address 10.0.0.2 255.255.255.0
+ ip address 10.0.0.1 255.255.255.0
  description Link to AlS2 gig0/1
+ service-policy output MLS-QOS
  no shutdown
 exit
 interface vlan10
@@ -94,7 +96,40 @@ ip dhcp pool VLAN30
 
 !NAT Config
 
-!ACL Config
+! Enable QoS
+mls qos
+
+! ACLs for matching traffic
+ip access-list extended WEB_SERVER
+ remark Match traffic to/from webserver 10.0.0.10
+ permit ip host 10.0.0.10 any
+ permit ip any host 10.0.0.10
+exit
+
+ip access-list extended VOICE_VLAN
+ remark Match voice traffic in VLAN 30 (10.0.3.0/24)
+ permit ip 10.0.3.0 0.0.0.255 any
+ permit ip any 10.0.3.0 0.0.0.255
+exit
+
+! Class-maps using ACLs (Packet Tracer compatible)
+class-map match-any WEB_SERVER
+ match access-group name WEB_SERVER
+exit
+
+class-map match-any VOICE_TRAFFIC
+ match access-group name VOICE_VLAN
+exit
+
+! Policy-map assigning bandwidth / priority (no DSCP)
+policy-map MLS-QOS
+ class VOICE_TRAFFIC
+  priority 512
+ class WEB_SERVER
+  bandwidth percent 20
+ class class-default
+  shape average 2000000
+exit
 
 end
 clock set 11:54:47 11 Dec 2025
