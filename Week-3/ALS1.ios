@@ -34,7 +34,6 @@ name voice
 
 !Port Config
 interface GigabitEthernet 0/1
- switchport trunk encapsulation dot1q
  switchport mode trunk
  description Link to MLS1 Gig1/0/1
  no shutdown
