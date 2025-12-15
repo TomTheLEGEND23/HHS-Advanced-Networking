@@ -44,16 +44,16 @@ interface FastEthernet 0/1
  description Link to PC1 FA0/1 10.0.1.10/24
  no shutdown
 exit
-interface FastEthernet 0/2
- switchport mode trunk
- switchport trunk allow vlan 20,30
- switchport access vlan 30
- description Link to Phone FA0/1 Phone: 10.0.3.10 | PC: 10.0.2.10
+interface FastEthernet0/2
+ description Link to Phone FA0/1 Phone: 10.0.3.10 | PC2: 10.0.2.10
+ switchport mode access
+ switchport access vlan 20
+ switchport voice vlan 30
  no shutdown
-exit
+
 !Spanning Tree Config
 
-!EtherChannels Config
+!EtherChannels Config;
 
 !HSRP Config
 
