@@ -40,17 +40,8 @@ interface loopback1
  no shutdown
 exit
 
-!Miscellaneous System Config
+ip route 10.0.1.0 255.255.255.0 10.1.0.2
+ip route 10.0.1.0 255.255.255.0 10.2.0.2
 
-!Ip Config
-
-!OSPF Config
-router ospf 1
- network 10.1.0.0 0.0.0.3 area 0
- network 10.2.0.0 0.0.0.3 area 0
- network 10.10.10.10 0.0.0.0 area 0
-exit
-
-end
-clock set 09:36:34 24 nov 2025
-!copy running-config startup-config
+ip route 10.0.2.0 255.255.255.0 10.1.0.2
+ip route 10.0.2.0 255.255.255.0 10.2.0.2

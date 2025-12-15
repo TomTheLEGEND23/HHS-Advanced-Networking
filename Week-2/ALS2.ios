@@ -3,7 +3,7 @@ delete vlan.dat
 
 
 configure terminal
-hostname ALS2
+hostname ALS1
 no ip domain-lookup
 banner motd #Verboden toegang voor onbevoegde!#
 line console 0
@@ -32,64 +32,276 @@ name vlan20
 vlan 999
 name unused
 
-ip dhcp snooping
-ip dhcp snooping vlan 10,20
+interface F0/21
+ switchport
+ switchport mode trunk
+ channel-group 1 mode active
+ no shutdown
+interface F0/22
+ switchport
+ switchport mode trunk
+ channel-group 1 mode active
+ no shutdown
 
-!Port Config
-interface range fa0/23-24
-channel-protocol lacp
-channel-group 1 mode active
-switchport mode trunk
-switchport trunk native vlan 999
-switchport nonegotiate
-exit
-
-interface range fa0/21-22
-channel-protocol lacp
-channel-group 2 mode active
-switchport mode trunk
-switchport trunk native vlan 999
-switchport nonegotiate
-exit
-
-interface Port-channel1
+interface port-channel 1
+ switchport
  switchport mode trunk
  switchport trunk native vlan 999
  switchport nonegotiate
- ip dhcp snooping trust
-exit
+ switchport trunk allowed vlan 10,20
+ no shutdown
 
-interface Port-channel2
+interface F0/23
+ switchport
+ switchport mode trunk
+ channel-group 2 mode active
+ no shutdown
+
+interface F0/24
+ switchport
+ switchport mode trunk
+ channel-group 2 mode active
+ no shutdown
+
+interface port-channel 2
+ switchport
  switchport mode trunk
  switchport trunk native vlan 999
  switchport nonegotiate
- ip dhcp snooping trust
+ switchport trunk allowed vlan 10,20
+ no shutdown
 exit
 
-interface fa0/1
-switchport mode access
-switchport access vlan 20
-switchport nonegotiate
-switchport port-security
-switchport port-security maximum 1
-switchport port-security mac-address sticky
-switchport port-security violation shutdown
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
 exit
 
-!Shutdown unused ports
-interface range fa0/2-20
-shutdown
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
 exit
 
-!Miscellaneous System Config
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
 
-!Spanning Tree Config
-spanning-tree mode rapid-pvst
-!EtherChannels Config
+interface FastEthernet0/4
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
 
-!Ip Config
+interface FastEthernet0/5
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/6
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/7
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/8
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/9
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/10
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/11
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/12
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/13
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/14
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/15
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/16
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+
+interface FastEthernet0/17
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+
+interface FastEthernet0/18
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+
+interface FastEthernet0/19
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
 
 
-end
-clock set 09:36:34 24 nov 2025
-!copy running-config startup-config
+interface FastEthernet0/20
+ switchport mode access
+ switchport access vlan 999
+ spanning-tree portfast
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+!
+! DHCP Snooping and DAI on access switch
+no ip dhcp snooping
+no ip dhcp snooping vlan 20
+no ip dhcp snooping vlan 10
+no ip dhcp snooping information option
+no ip arp inspection vlan 10,20
+!
+interface port-channel 1
+ no ip dhcp snooping trust
+ no ip arp inspection trust
+!
+interface port-channel 2
+ no ip dhcp snooping trust
+ no ip arp inspection trust
+ 

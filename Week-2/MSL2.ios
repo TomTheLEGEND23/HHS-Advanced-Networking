@@ -3,7 +3,7 @@ delete vlan.dat
 
 
 configure terminal
-hostname MSL2
+hostname MSL1
 no ip domain-lookup
 banner motd #Verboden toegang voor onbevoegde!#
 line console 0
@@ -39,26 +39,25 @@ vlan 999
 interface Vlan10
  ip address 10.0.1.2 255.255.255.0
  no shutdown
+ vrrp 10 address-family ipv4
+track 11 decrement 150
+address 10.0.1.3 primary
+priority 200
 exit
 
 interface Vlan20
  ip address 10.0.2.2 255.255.255.0
  no shutdown
+ vrrp 20 address-family ipv4
+track 11 decrement 50
+address 10.0.2.3 primary
+priority 100
 exit
 
 interface range gigabitEthernet 1/0/13-14
 no switchport
  channel-protocol lacp
  channel-group 3 mode active
- lacp port-priority 100
-exit
-
-interface range gigabitEthernet 1/0/21-22
- switchport mode trunk
- switchport trunk native vlan 999
- switchport nonegotiate
- channel-protocol lacp
- channel-group 2 mode active
  lacp port-priority 100
 exit
 
@@ -71,15 +70,26 @@ interface range gigabitEthernet 1/0/23-24
  lacp port-priority 100
 exit
 
+interface range gigabitEthernet 1/0/21-22
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport nonegotiate
+ channel-protocol lacp
+ channel-group 2 mode active
+ lacp port-priority 100
+exit
+
 interface port-channel 1
  switchport mode trunk
  switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20
  switchport nonegotiate
 exit
 
 interface port-channel 2
  switchport mode trunk
  switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20
  switchport nonegotiate
 exit
 
@@ -88,8 +98,7 @@ no switchport
 ip address 10.3.0.2 255.255.255.252
 exit
 
-
-interface GigabitEthernet 1/0/11
+interface GigabitEthernet1/0/11
 no switchport
  ip address 10.2.0.2 255.255.255.252
  no shutdown
@@ -106,46 +115,20 @@ interface range gigabitEthernet 1/0/15-20
 shutdown
 exit
 
-fhrp version vrrp v3
-track 11 interface GigabitEthernet1/0/11 line-protocol
+ip route 10.1.0.0 255.255.255.252 10.3.0.1
+ip route 0.0.0.0 0.0.0.0 10.2.0.1
 
-interface vlan 10
-vrrp 10 address-family ipv4
-track 11 decrement 50
-address 10.0.1.3 primary
-priority 100
-exit
+spanning-tree vlan 10 priority 4096
+spanning-tree vlan 20 priority 32768
 
-interface vlan 20
-vrrp 20 address-family ipv4
-track 11 decrement 150
-address 10.0.2.3 primary
-priority 200
-exit
+! Security features
+ip dhcp snooping
+ip dhcp snooping vlan 10,20
+ip dhcp snooping information option
+no ip arp inspection vlan 10,20
 
-!Spanning Tree Config
-spanning-tree mode rapid-pvst
-spanning-tree vlan 10 root secondary
-spanning-tree vlan 20 root primary
+interface port-channel 1
+ ip dhcp snooping trust
 
-!EtherChannels Config
-
-!Ip Config
-
-!VRRP Config
-
-!OSPF Config
-router ospf 1
- network 10.0.1.0 0.0.0.255 area 0
- network 10.0.2.0 0.0.0.255 area 0
- network 10.3.0.0 0.0.0.3 area 0
- network 10.2.0.0 0.0.0.3 area 0
- passive-interface gigabitEthernet 1/0/21
- passive-interface gigabitEthernet 1/0/22
- passive-interface gigabitEthernet 1/0/23
- passive-interface gigabitEthernet 1/0/24
-exit
-
-end
-clock set 09:36:34 24 nov 2025
-!copy running-config startup-config
+interface port-channel 2
+ ip dhcp snooping trust
