@@ -50,6 +50,7 @@ interface FastEthernet0/2
  switchport access vlan 20
  switchport voice vlan 30
  no shutdown
+exit
 
 !Spanning Tree Config
 

@@ -73,6 +73,18 @@ router ospf 1
 exit
 !DHCP Config
 service dhcp
+ip dhcp excluded-address 10.0.1.1 10.0.1.9
+ip dhcp excluded-address 10.0.1.51 10.0.1.254
+ip dhcp pool VLAN10
+ network 10.0.1.0 255.255.255.0
+ default-router 10.0.1.1
+
+ip dhcp excluded-address 10.0.2.1 10.0.2.9
+ip dhcp excluded-address 10.0.2.51 10.0.2.254
+ip dhcp pool VLAN20
+ network 10.0.2.0 255.255.255.0
+ default-router 10.0.2.1
+
 ip dhcp excluded-address 10.0.3.1 10.0.3.10
 ip dhcp excluded-address 10.0.3.51 10.0.3.254
 ip dhcp pool VLAN30
