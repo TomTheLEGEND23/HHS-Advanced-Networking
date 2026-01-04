@@ -31,16 +31,17 @@ ipv6 unicast-routing
 !Port Config
 ! R2V6 to R1V6 (Serial 0/1/0)
 interface Serial0/1/0
- description R2V6-to-R1V6
+ description R2V6-to-R1V6(Serial0/1/0)
  ipv6 address 2001:db8:2::2/127
  encapsulation ppp
  no shutdown
  exit
 
-! R2V6 to ISP (GigabitEthernet 0/0/0)
-interface GigabitEthernet0/0/0
- description R2V6-to-ISP
- ipv6 address 2001:db8:3::2/127
+! R2V6 to ISP (Serial 0/1/1)
+interface Serial0/1/1
+ description R2V6-to-ISP(Serial0/1/1)
+ ipv6 address 2001:db8:1::2/127
+ encapsulation ppp
  no shutdown
  exit
 

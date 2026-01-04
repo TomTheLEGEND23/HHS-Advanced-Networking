@@ -37,15 +37,16 @@ vlan 20
 !Port Config
 ! R1 to ISP (Serial 0/1/0)
 interface Serial0/1/0
- description R1-to-ISP
+ description R1-to-ISP(Serial0/1/0)
  ip address 10.0.0.2 255.255.255.252
+ ipv6 address 2001:db8:1::1/127
  encapsulation ppp
  no shutdown
  exit
 
 ! R1 to R2 (Serial 0/1/1)
 interface Serial0/1/1
- description R1-to-R2
+ description R1-to-R2(Serial0/1/0)
  ip address 10.0.0.5 255.255.255.252
  encapsulation ppp
  no shutdown
@@ -53,14 +54,14 @@ interface Serial0/1/1
 
 ! R1 to MLS1 (GigabitEthernet 0/0/0)
 interface GigabitEthernet0/0/0
- description R1-to-MLS1
+ description R1-to-MLS1(GigabitEthernet0/1)
  ip address 10.0.0.9 255.255.255.252
  no shutdown
  exit
 
 ! R1 to MLS2 (GigabitEthernet 0/0/1)
 interface GigabitEthernet0/0/1
- description R1-to-MLS2
+ description R1-to-MLS2(GigabitEthernet0/1)
  ip address 10.0.0.13 255.255.255.252
  no shutdown
  exit

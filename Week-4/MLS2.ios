@@ -38,27 +38,28 @@ vlan 20
 !Port Config
 ! MLS2 to R1 (GigabitEthernet 0/1)
 interface GigabitEthernet0/1
- description MLS2-to-R1
+ description MLS2-to-R1(GigabitEthernet0/0/1)
  ip address 10.0.0.14 255.255.255.252
  no shutdown
  exit
 
-! MLS2 to MLS1 (GigabitEthernet 0/2) - VRRP link
+! MLS2 to MLS1 (GigabitEthernet 0/2) - Layer 3 routed link
 interface GigabitEthernet0/2
- description MLS2-to-MLS1
+ no switchport
+ description MLS2-to-MLS1(GigabitEthernet0/2)
  ip address 10.0.0.18 255.255.255.252
  no shutdown
  exit
 
 ! MLS2 to ALS1 (GigabitEthernet 0/3)
 interface GigabitEthernet0/3
- description MLS2-to-ALS1
+ description MLS2-to-ALS1(GigabitEthernet0/2)
  no shutdown
  exit
 
 ! MLS2 to ALS2 (GigabitEthernet 0/4)
 interface GigabitEthernet0/4
- description MLS2-to-ALS2
+ description MLS2-to-ALS2(GigabitEthernet0/2)
  no shutdown
  exit
 

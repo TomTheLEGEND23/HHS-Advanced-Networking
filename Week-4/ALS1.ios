@@ -33,19 +33,19 @@ vlan 10
 !Port Config
 ! ALS1 to MLS1 (GigabitEthernet 0/1)
 interface GigabitEthernet0/1
- description ALS1-to-MLS1
+ description ALS1-to-MLS1(GigabitEthernet0/3)
  no shutdown
  exit
 
 ! ALS1 to MLS2 (GigabitEthernet 0/2)
 interface GigabitEthernet0/2
- description ALS1-to-MLS2
+ description ALS1-to-MLS2(GigabitEthernet0/3)
  no shutdown
  exit
 
 ! ALS1 to PC1 (GigabitEthernet 0/3) - VLAN 10
 interface GigabitEthernet0/3
- description ALS1-to-PC1
+ description ALS1-to-PC1(Interface0)
  switchport mode access
  switchport access vlan 10
  no shutdown

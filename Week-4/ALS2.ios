@@ -33,19 +33,19 @@ vlan 20
 !Port Config
 ! ALS2 to MLS1 (GigabitEthernet 0/1)
 interface GigabitEthernet0/1
- description ALS2-to-MLS1
+ description ALS2-to-MLS1(GigabitEthernet0/4)
  no shutdown
  exit
 
 ! ALS2 to MLS2 (GigabitEthernet 0/2)
 interface GigabitEthernet0/2
- description ALS2-to-MLS2
+ description ALS2-to-MLS2(GigabitEthernet0/4)
  no shutdown
  exit
 
 ! ALS2 to PC2 (GigabitEthernet 0/3) - VLAN 20
 interface GigabitEthernet0/3
- description ALS2-to-PC2
+ description ALS2-to-PC2(Interface0)
  switchport mode access
  switchport access vlan 20
  no shutdown

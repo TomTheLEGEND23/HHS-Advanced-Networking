@@ -31,9 +31,17 @@ ipv6 unicast-routing
 !Port Config
 ! ISP to R1 (Serial 0/1/0)
 interface Serial0/1/0
- description ISP-to-R1
+ description ISP-to-R1(Serial0/1/0)
  ip address 10.0.0.1 255.255.255.252
  ipv6 address 2001:db8:1::1/127
+ encapsulation ppp
+ no shutdown
+ exit
+
+! ISP to R2V6 (Serial 0/1/1)
+interface Serial0/1/1
+ description ISP-to-R2V6(Serial0/1/1)
+ ipv6 address 2001:db8:1::2/127
  encapsulation ppp
  no shutdown
  exit
