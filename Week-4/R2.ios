@@ -26,20 +26,6 @@ crypto key generate rsa general-keys modulus 2048
 ip routing
 ipv6 unicast-routing
 
-!Vlan Config
-vlan 32
- name VLAN32
- exit
-vlan 33
- name VLAN33
- exit
-vlan 34
- name VLAN34
- exit
-vlan 35
- name VLAN35
- exit
-
 !Port Config
 ! R2 to R1 (Serial 0/1/0)
 interface Serial0/1/0
@@ -49,46 +35,21 @@ interface Serial0/1/0
  no shutdown
  exit
 
-! VLAN 32 Interface
-interface Vlan32
- ip address 192.168.32.1 255.255.255.0
- exit
-
-! VLAN 33 Interface
-interface Vlan33
- ip address 192.168.33.1 255.255.255.0
- exit
-
-! VLAN 34 Interface
-interface Vlan34
- ip address 192.168.34.1 255.255.255.0
- exit
-
-! VLAN 35 Interface
-interface Vlan35
- ip address 192.168.35.1 255.255.255.0
- exit
-
-! Loopback for OSPF
-interface Loopback0
- ip address 10.255.255.3 255.255.255.255
- exit
-
-! Loopback1-4 for VLAN summarization
+! Loopback1-4
 interface Loopback1
- ip address 192.168.32.0 255.255.255.255
+ ip address 192.168.32.1 255.255.255.255
  exit
 
 interface Loopback2
- ip address 192.168.33.0 255.255.255.255
+ ip address 192.168.33.1 255.255.255.255
  exit
 
 interface Loopback3
- ip address 192.168.34.0 255.255.255.255
+ ip address 192.168.34.1 255.255.255.255
  exit
 
 interface Loopback4
- ip address 192.168.35.0 255.255.255.255
+ ip address 192.168.35.1 255.255.255.255
  exit
 
 !Spanning Tree Config
@@ -106,10 +67,6 @@ router ospf 1
  network 192.168.34.0 0.0.0.255 area 0
  network 192.168.35.0 0.0.0.255 area 0
  network 10.255.255.3 0.0.0.0 area 0
- network 192.168.32.0 0.0.0.0 area 0
- network 192.168.33.0 0.0.0.0 area 0
- network 192.168.34.0 0.0.0.0 area 0
- network 192.168.35.0 0.0.0.0 area 0
  ! Summary route for VLAN 32-35
  area 0 range 192.168.32.0 255.255.252.0
  redistribute connected subnets

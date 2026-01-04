@@ -32,21 +32,14 @@ ipv6 unicast-routing
 ! SW1 to R1V6 (GigabitEthernet 0/1)
 interface GigabitEthernet0/1
  description SW1-to-R1V6(GigabitEthernet0/0/0)
- ipv6 address 2001:db8:100::2/127
- no shutdown
  exit
 
 ! SW1 to PCE (GigabitEthernet 0/2)
 interface GigabitEthernet0/2
  description SW1-to-PCE(Interface0)
- ipv6 address 2001:db8:101::1/127
- no shutdown
  exit
 
-! Loopback for management
-interface Loopback0
- ipv6 address 2001:db8::100/128
- exit
+! Management interface
 
 !Spanning Tree Config
 

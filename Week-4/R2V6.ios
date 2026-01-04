@@ -33,6 +33,7 @@ ipv6 unicast-routing
 interface Serial0/1/0
  description R2V6-to-R1V6(Serial0/1/0)
  ipv6 address 2001:db8:2::2/127
+ ipv6 ospf 1 area 0
  encapsulation ppp
  no shutdown
  exit
@@ -41,6 +42,7 @@ interface Serial0/1/0
 interface Serial0/1/1
  description R2V6-to-ISP(Serial0/1/1)
  ipv6 address 2001:db8:1::2/127
+ ipv6 ospf 1 area 0
  encapsulation ppp
  no shutdown
  exit
@@ -48,6 +50,7 @@ interface Serial0/1/1
 ! Loopback for OSPFv3
 interface Loopback0
  ipv6 address 2001:db8::3/128
+ ipv6 ospf 1 area 0
  exit
 
 !Spanning Tree Config
@@ -57,14 +60,8 @@ interface Loopback0
 !HSRP Config
 
 !OSPF Config
-router ospfv3 1
+ipv6 router ospf 1
  router-id 10.255.255.4
- !
- address-family ipv6 unicast
-  network 2001:db8:2::/127 area 0
-  network 2001:db8:3::/127 area 0
-  network 2001:db8::3/128 area 0
- exit-address-family
  exit
 
 !DHCP Config
