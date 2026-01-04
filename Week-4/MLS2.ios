@@ -23,18 +23,87 @@ ip domain-name hhs.nl
 crypto key generate rsa general-keys modulus 2048
 
 !Miscellaneous System Config
+ip routing
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10,20,32,33,34,35 priority 16384
 
 !Vlan Config
+vlan 10
+ name VLAN10
+ exit
+vlan 20
+ name VLAN20
+ exit
 
 !Port Config
+! MLS2 to R1 (GigabitEthernet 0/1)
+interface GigabitEthernet0/1
+ description MLS2-to-R1
+ ip address 10.0.0.14 255.255.255.252
+ no shutdown
+ exit
+
+! MLS2 to MLS1 (GigabitEthernet 0/2) - VRRP link
+interface GigabitEthernet0/2
+ description MLS2-to-MLS1
+ ip address 10.0.0.18 255.255.255.252
+ no shutdown
+ exit
+
+! MLS2 to ALS1 (GigabitEthernet 0/3)
+interface GigabitEthernet0/3
+ description MLS2-to-ALS1
+ no shutdown
+ exit
+
+! MLS2 to ALS2 (GigabitEthernet 0/4)
+interface GigabitEthernet0/4
+ description MLS2-to-ALS2
+ no shutdown
+ exit
+
+! VLAN 10 Interface - Secondary IP
+interface Vlan10
+ ip address 10.0.10.3 255.255.255.0
+ standby version 2
+ standby 10 ip 10.0.10.1
+ standby 10 priority 100
+ exit
+
+! VLAN 20 Interface - Primary IP
+interface Vlan20
+ ip address 10.0.20.2 255.255.255.0
+ standby version 2
+ standby 20 ip 10.0.20.1
+ standby 20 priority 110
+ standby 20 preempt
+ exit
+
+! Loopback for OSPF
+interface Loopback0
+ ip address 10.255.255.5 255.255.255.255
+ exit
 
 !Spanning Tree Config
+spanning-tree vlan 10 root secondary
+spanning-tree vlan 20 root primary
 
 !EtherChannels Config
 
 !HSRP Config
+! VRRP Configuration (using HSRP for simplicity)
+! VLAN 10 is active on MLS1, VLAN 20 is active on MLS2
 
 !OSPF Config
+router ospf 1
+ router-id 10.255.255.5
+ network 10.0.0.12 0.0.0.3 area 0
+ network 10.0.0.16 0.0.0.3 area 0
+ network 10.0.10.0 0.0.0.255 area 0
+ network 10.0.20.0 0.0.0.255 area 0
+ network 10.255.255.5 0.0.0.0 area 0
+ redistribute connected subnets
+ exit
 
 !DHCP Config
 

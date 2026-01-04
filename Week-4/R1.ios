@@ -23,10 +23,62 @@ ip domain-name hhs.nl
 crypto key generate rsa general-keys modulus 2048
 
 !Miscellaneous System Config
+ip routing
+ipv6 unicast-routing
 
 !Vlan Config
+vlan 10
+ name VLAN10
+ exit
+vlan 20
+ name VLAN20
+ exit
 
 !Port Config
+! R1 to ISP (Serial 0/1/0)
+interface Serial0/1/0
+ description R1-to-ISP
+ ip address 10.0.0.2 255.255.255.252
+ encapsulation ppp
+ no shutdown
+ exit
+
+! R1 to R2 (Serial 0/1/1)
+interface Serial0/1/1
+ description R1-to-R2
+ ip address 10.0.0.5 255.255.255.252
+ encapsulation ppp
+ no shutdown
+ exit
+
+! R1 to MLS1 (GigabitEthernet 0/0/0)
+interface GigabitEthernet0/0/0
+ description R1-to-MLS1
+ ip address 10.0.0.9 255.255.255.252
+ no shutdown
+ exit
+
+! R1 to MLS2 (GigabitEthernet 0/0/1)
+interface GigabitEthernet0/0/1
+ description R1-to-MLS2
+ ip address 10.0.0.13 255.255.255.252
+ no shutdown
+ exit
+
+! VLAN 10 Interface
+interface Vlan10
+ ip address 10.0.10.1 255.255.255.0
+ exit
+
+! VLAN 20 Interface
+interface Vlan20
+ ip address 10.0.20.1 255.255.255.0
+ exit
+
+! Loopback for OSPF
+interface Loopback0
+ ip address 10.255.255.2 255.255.255.255
+ exit
 
 !Spanning Tree Config
 
@@ -35,6 +87,18 @@ crypto key generate rsa general-keys modulus 2048
 !HSRP Config
 
 !OSPF Config
+router ospf 1
+ router-id 10.255.255.2
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 0
+ network 10.0.0.8 0.0.0.3 area 0
+ network 10.0.0.12 0.0.0.3 area 0
+ network 10.0.10.0 0.0.0.255 area 0
+ network 10.0.20.0 0.0.0.255 area 0
+ network 10.255.255.2 0.0.0.0 area 0
+ default-information originate always
+ redistribute connected subnets
+ exit
 
 !DHCP Config
 
