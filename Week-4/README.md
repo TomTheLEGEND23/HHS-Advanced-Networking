@@ -56,7 +56,7 @@ ALS2 - PC2 (VLAN 20)
 | MLS1 | 10 | VLAN10 | 10.0.10.2/24 | VRRP Primary (Priority 110) |
 | MLS2 | 10 | VLAN10 | 10.0.10.3/24 | VRRP Secondary (Priority 100) |
 | VRRP VIP | 10 | - | 10.0.10.1/24 | Virtual IP |
-| PC1 | 10 | - | DHCP | Client |
+| PC1 | 10 | - | 10.0.10.10/24 | Client (static) |
 
 #### VLAN 20 (Gateway on R1)
 | Device | VLAN | Interface | IP Address | Purpose |
@@ -65,7 +65,7 @@ ALS2 - PC2 (VLAN 20)
 | MLS1 | 20 | VLAN20 | 10.0.20.3/24 | VRRP Secondary (Priority 100) |
 | MLS2 | 20 | VLAN20 | 10.0.20.2/24 | VRRP Primary (Priority 110) |
 | VRRP VIP | 20 | - | 10.0.20.1/24 | Virtual IP |
-| PC2 | 20 | - | DHCP | Client |
+| PC2 | 20 | - | 10.0.20.10/24 | Client (static) |
 
 ### R2 VLAN Configuration (for summarization)
 
