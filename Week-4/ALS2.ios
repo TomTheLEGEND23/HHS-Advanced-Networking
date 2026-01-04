@@ -43,8 +43,8 @@ interface GigabitEthernet0/2
  no shutdown
  exit
 
-! ALS2 to PC2 (GigabitEthernet 0/3) - VLAN 20
-interface GigabitEthernet0/3
+! ALS2 to PC2 (FastEthernet0/3) - VLAN 20
+interface FastEthernet0/1
  description ALS2-to-PC2(Interface0)
  switchport mode access
  switchport access vlan 20
@@ -55,8 +55,7 @@ interface GigabitEthernet0/3
 spanning-tree portfast
 spanning-tree vlan 20 priority 16384
 
-!EtherChannels Config
-
+!EtherChannels Conf
 !HSRP Config
 
 !OSPF Config

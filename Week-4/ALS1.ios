@@ -43,8 +43,8 @@ interface GigabitEthernet0/2
  no shutdown
  exit
 
-! ALS1 to PC1 (GigabitEthernet 0/3) - VLAN 10
-interface GigabitEthernet0/3
+! ALS1 to PC1 (FastEthernet 0/3) - VLAN 10
+interface FastEthernet0/1
  description ALS1-to-PC1(Interface0)
  switchport mode access
  switchport access vlan 10
