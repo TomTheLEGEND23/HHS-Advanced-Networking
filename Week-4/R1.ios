@@ -58,20 +58,6 @@ interface GigabitEthernet0/0/1
  no shutdown
  exit
 
-! VLAN 10 Interface
-interface Vlan10
- ip address 10.0.10.1 255.255.255.0
- exit
-
-! VLAN 20 Interface
-interface Vlan20
- ip address 10.0.20.1 255.255.255.0
- exit
-
-! Loopback for OSPF
-interface Loopback0
- ip address 10.255.255.2 255.255.255.255
- exit
 
 !Spanning Tree Config
 
@@ -86,9 +72,6 @@ router ospf 1
  network 10.0.0.4 0.0.0.3 area 0
  network 10.0.0.8 0.0.0.3 area 0
  network 10.0.0.12 0.0.0.3 area 0
- network 10.0.10.0 0.0.0.255 area 0
- network 10.0.20.0 0.0.0.255 area 0
- network 10.255.255.2 0.0.0.0 area 0
  default-information originate always
  redistribute connected subnets
  exit
