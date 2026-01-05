@@ -27,8 +27,8 @@ ip routing
 ipv6 unicast-routing
 
 !Port Config
-! R2 to R1 (Serial 0/1/0)
-interface Serial0/1/0
+! R2 to R1 (Serial 0/1/1)
+interface Serial0/1/1
  description R2-to-R1(Serial0/1/1)
  ip address 10.0.0.6 255.255.255.252
  encapsulation ppp
