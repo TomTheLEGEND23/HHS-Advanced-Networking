@@ -30,15 +30,25 @@ vlan 10
  name VLAN10
  exit
 
+vlan 20
+ name VLAN20
+ exit
+
 !Port Config
 ! ALS1 to MLS1 (GigabitEthernet 0/1)
 interface GigabitEthernet0/1
  description ALS1-to-MLS1(GigabitEthernet0/3)
+ switchport trunk allowed vlan 10,20
+ switchport mode trunk
+ spanning-tree portfast trunk
  no shutdown
  exit
 
 ! ALS1 to MLS2 (GigabitEthernet 0/2)
 interface GigabitEthernet0/2
+ switchport trunk allowed vlan 10,20
+ switchport mode trunk
+ spanning-tree portfast trunk
  description ALS1-to-MLS2(GigabitEthernet0/3)
  no shutdown
  exit

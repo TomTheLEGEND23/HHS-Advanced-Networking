@@ -55,12 +55,16 @@ interface GigabitEthernet1/0/2
 ! MLS2 to ALS1 (GigabitEthernet 1/0/3)
 interface GigabitEthernet1/0/3
  description MLS2-to-ALS1(GigabitEthernet0/2)
+ switchport trunk allowed vlan 10,20
+ switchport mode trunk
  no shutdown
  exit
 
 ! MLS2 to ALS2 (GigabitEthernet 1/0/4)
 interface GigabitEthernet1/0/4
  description MLS2-to-ALS2(GigabitEthernet0/2)
+ switchport trunk allowed vlan 10,20
+ switchport mode trunk
  no shutdown
  exit
 
