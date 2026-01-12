@@ -39,6 +39,8 @@ exit
  ip address 30.0.255.250 255.255.255.252
  no shutdown
 exit
+!GBP
+bgp router-id 1.1.1.2
 
 end
 clock set 12:05:49 11 Dec 2025

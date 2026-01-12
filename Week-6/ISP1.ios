@@ -41,6 +41,9 @@ exit
  no shutdown
 exit
 
+!GBP
+bgp router-id 1.1.1.1
+
 end
 clock set 12:05:49 11 Dec 2025
 !copy running-config startup-config
