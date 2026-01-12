@@ -22,26 +22,26 @@ ip domain-name hhs.nl
 !crypto key zeroize rsa
 crypto key generate rsa general-keys modulus 2048
 
-!Miscellaneous System Config
+interface GigabitEthernet 0/0/0
+ip address 40.0.255.254 255.255.255.252
+no shutdown
+exit
 
-!Vlan Config
+interface GigabitEthernet 0/0/1
+ip address 20.0.2.1 255.255.255.0
+no shutdown
+exit
 
-!Port Config
+interface Serial 0/0/0
+ip address 20.0.0.2 255.255.255.0
+no shutdown
+exit
 
-!Spanning Tree Config
-
-!EtherChannels Config
-
-!HSRP Config
-
-!OSPF Config
-
-!DHCP Config
-
-!NAT Config
-
-!ACL Config
+router ospf 1
+network 20.0.0.0 0.0.0.255 area 0
+network 20.0.2.0 0.0.0.255 area 0
+network 40.0.255.252 0.0.0.3 area 0
 
 end
 clock set 12:05:49 11 Dec 2025
-!copy running-config startup-config
+
