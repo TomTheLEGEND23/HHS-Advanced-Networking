@@ -78,7 +78,7 @@ router ospf 1
  network 10.0.0.12 0.0.0.3 area 0
  area 1 stub
  exit
-
+! IF error 'clear ip ospf process'
 !DHCP Config
 
 !NAT Config
