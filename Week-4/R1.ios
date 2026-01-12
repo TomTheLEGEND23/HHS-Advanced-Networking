@@ -21,6 +21,9 @@ line vty 0 4
 ip domain-name hhs.nl
 !crypto key zeroize rsa
 crypto key generate rsa general-keys modulus 2048
+!
+! PPP CHAP peer credentials for R2
+username R2 secret chapR12
 
 !Miscellaneous System Config
 ip routing
@@ -41,6 +44,7 @@ interface Serial0/1/1
  description R1-to-R2(Serial0/1/0)
  ip address 10.0.0.5 255.255.255.252
  encapsulation ppp
+ ppp authentication chap
  no shutdown
  exit
 
@@ -69,10 +73,10 @@ interface GigabitEthernet0/0/1
 router ospf 1
  router-id 10.255.255.2
  network 10.0.0.0 0.0.0.3 area 0
- network 10.0.0.4 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 1
  network 10.0.0.8 0.0.0.3 area 0
  network 10.0.0.12 0.0.0.3 area 0
- default-information originate always
+ !default-information originate always
  redistribute connected subnets
  exit
 

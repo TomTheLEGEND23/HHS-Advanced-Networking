@@ -21,6 +21,9 @@ line vty 0 4
 ip domain-name hhs.nl
 !crypto key zeroize rsa
 crypto key generate rsa general-keys modulus 2048
+!
+! PPP CHAP peer credentials for R1
+username R1 secret chapR12
 
 !Miscellaneous System Config
 ip routing
@@ -32,6 +35,7 @@ interface Serial0/1/1
  description R2-to-R1(Serial0/1/1)
  ip address 10.0.0.6 255.255.255.252
  encapsulation ppp
+ ppp authentication chap
  no shutdown
  exit
 
@@ -61,14 +65,14 @@ interface Loopback4
 !OSPF Config
 router ospf 1
  router-id 10.255.255.3
- network 10.0.0.4 0.0.0.3 area 0
- network 192.168.32.0 0.0.0.255 area 0
- network 192.168.33.0 0.0.0.255 area 0
- network 192.168.34.0 0.0.0.255 area 0
- network 192.168.35.0 0.0.0.255 area 0
- network 10.255.255.3 0.0.0.0 area 0
- ! Summary route for VLAN 32-35
- area 0 range 192.168.32.0 255.255.252.0
+ network 10.0.0.4 0.0.0.3 area 1
+ network 192.168.32.0 0.0.0.255 area 1
+ network 192.168.33.0 0.0.0.255 area 1
+ network 192.168.34.0 0.0.0.255 area 1
+ network 192.168.35.0 0.0.0.255 area 1
+ network 10.255.255.3 0.0.0.0 area 1
+ ! Summary route for VLAN 32-35 in area 1
+ area 1 range 192.168.32.0 255.255.252.0
  redistribute connected subnets
  exit
 
