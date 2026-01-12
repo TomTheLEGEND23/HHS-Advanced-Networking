@@ -1,0 +1,81 @@
+enable
+configure terminal
+hostname Router1
+no ip domain-lookup
+banner motd #Verboden toegang voor onbevoegde!#
+line console 0
+ exec-timeout 60 0
+ logging synchronous
+ exit
+enable secret class
+
+username user priv 15 password cisc
+aaa new-model
+aaa authentication login MGT local
+aaa authentication enable default enable
+line vty 0 4
+transport input ssh
+login authentication MGT
+exec-timeout 60
+loggin synchronous
+exit
+ip domain-name hhs.nl
+!crypto key zeroize rsa
+crypto key generate rsa
+2048
+
+vlan 10
+name vlan10
+exit
+
+vlan 20
+name vlan20
+exit
+
+interface vlan 10
+ip address 10.40.10.3 255.255.255.0
+standby 10 ip 10.40.10.1
+standby 10 priority 100
+standby 10 preempt
+exit
+
+interface vlan 20
+ip address 10.40.20.3 255.255.255.0
+standby 10 ip 10.40.20.1
+standby 10 priority 110
+standby 10 preempt
+exit
+
+ip routing
+
+interface Gig 1/0/1
+no switchport
+ip address 10.10.10.13 255.255.255.252
+no shut
+exit
+
+interface Gig 1/0/2
+no switchport
+ip address 10.10.10.2 255.255.255.252
+no shut
+exit
+
+interface Gig 1/0/3
+switchport mode access
+switchport access vlan 20
+no shut
+exit
+
+interface Gig 1/0/4
+switchport mode access
+switchport access vlan 10
+no shut
+exit
+
+router eigrp 100
+network 10.40.10.0 0.0.0.255
+network 10.40.20.0 0.0.0.255
+network 10.10.10.12 0.0.0.3
+network 10.10.10.0 0.0.0.3
+no auto-summary
+exit
