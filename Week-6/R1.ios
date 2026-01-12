@@ -32,8 +32,8 @@ ip address 20.0.1.1 255.255.255.0
 no shutdown
 exit
 
-interface Serial 0/0/0
-clock 64000
+interface Serial 0/1/0
+clock rate 64000
 ip address 20.0.0.1 255.255.255.0
 no shutdown
 exit
@@ -42,6 +42,16 @@ router ospf 1
 network 20.0.0.0 0.0.0.255 area 0
 network 20.0.1.0 0.0.0.255 area 0
 network 30.0.255.252 0.0.0.3 area 0
+
+router bgp 120
+bgp router-id 120.0.0.1
+bgp log-neighbor-changes
+neighbor 30.0.255.253 remote-as 130
+neighbor 20.0.0.2 remote-as 120
+network 20.0.0.0 mask 255.255.255.0
+network 20.0.1.0 mask 255.255.255.0
+network 30.0.255.252 mask 255.255.255.252
+exit
 
 end
 clock set 12:05:49 11 Dec 2025
